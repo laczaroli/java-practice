@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 class Node {
 	public int value;
 	public Node right;
@@ -40,7 +38,6 @@ class BinaryTree {
 	{
 		if(temp != null)
 		{
-			depth++;
 			for(int i = 0; i<depth; i++)
 				System.out.print("-");
 			kiir(temp.left);
