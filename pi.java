@@ -3,10 +3,18 @@ package prog2;
 class pi {
 	public static void main(String[] args) {
 		pi dpike = new pi();
-		System.out.print(dpike.dpi(1000000));
+		long start = System.currentTimeMillis();
+		System.out.println(dpike.dpi(100000000)); // 10^6
+		long end = System.currentTimeMillis();
+		
+		double x = (double) (end-start); 
+		
+		System.out.println(x/1000 + "mp");
+		//1.592mp - 10 ^ 6
+		//18.406mp - 10 ^ 7 
+		//211.162mp - 10 ^ 8
 	}
-	
-	public double dpi(int d)
+	public String dpi(int d)
 	{
 		double Sone = calc(d,1);
 		double Sfour = calc(d,4);
@@ -14,9 +22,27 @@ class pi {
 		double Ssix = calc(d,6);
 		
 		double sixtdpi = (4.0*Sone)-(2.0*Sfour)-Sfive-Ssix;
-
 		
-		return sixtdpi - (int) sixtdpi;
+		
+		sixtdpi = sixtdpi - (int) sixtdpi;
+		
+		if(sixtdpi < 0) sixtdpi += 1;
+		
+		String sb = "";
+		
+		Character[] Hexs = {'A','B','C','D','E','F'};
+		
+		while(sixtdpi != 0.0)
+		{
+			int jegy = (int) (16.0*sixtdpi);
+			
+			if(jegy < 10) sb = Integer.toString(jegy);
+			else sb = Character.toString(Hexs[jegy-10]);
+			
+			sixtdpi = (16*sixtdpi) - StrictMath.floor(16.0*sixtdpi);
+		}
+		
+		return sb;
 	}
 	
 	public double calc(int d, int n)
